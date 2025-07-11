@@ -1,0 +1,302 @@
+{
+  "datasets": [
+    {
+      "name": "83b65385",
+      "displayName": "marketing_user",
+      "queryLines": [
+        "SELECT * FROM jpmc.srikant.marketing_user"
+      ]
+    },
+    {
+      "name": "a2c7ec2b",
+      "displayName": "sales",
+      "queryLines": [
+        "SELECT * FROM jpmc.srikant.sales"
+      ]
+    },
+    {
+      "name": "8fa6e17c",
+      "displayName": "bike_sharing",
+      "queryLines": [
+        "SELECT * FROM jpmc.srikant.bike_sharing"
+      ],
+      "catalog": "jpmc",
+      "schema": "srikant_gold"
+    }
+  ],
+  "pages": [
+    {
+      "name": "1db45e2a",
+      "displayName": "Oveview",
+      "layout": [
+        {
+          "widget": {
+            "name": "020a65d4",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a2c7ec2b",
+                  "fields": [
+                    {
+                      "name": "sum(total_amount)",
+                      "expression": "SUM(`total_amount`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_amount)",
+                  "displayName": "Sum of total_amount"
+                }
+              },
+              "frame": {
+                "title": "Total Sales Amount",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "f1e6c9b9",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "83b65385",
+                  "fields": [
+                    {
+                      "name": "count(user_id)",
+                      "expression": "COUNT(`user_id`)"
+                    },
+                    {
+                      "name": "location",
+                      "expression": "`location`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "count(user_id)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "Count of user_id"
+                },
+                "color": {
+                  "fieldName": "location",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "location"
+                }
+              },
+              "frame": {
+                "title": "Users by Location",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "8d8e0009",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "8fa6e17c",
+                  "fields": [
+                    {
+                      "name": "season",
+                      "expression": "`season`"
+                    },
+                    {
+                      "name": "sum(cnt)",
+                      "expression": "SUM(`cnt`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "season",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  },
+                  "displayName": "season"
+                },
+                "y": {
+                  "fieldName": "sum(cnt)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "Sum of cnt"
+                }
+              },
+              "frame": {
+                "title": "Total Bike Rentals by Season",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "f0709b49",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "8fa6e17c",
+                  "fields": [
+                    {
+                      "name": "sum(cnt)",
+                      "expression": "SUM(`cnt`)"
+                    },
+                    {
+                      "name": "weathersit",
+                      "expression": "`weathersit`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "sum(cnt)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "Sum of cnt"
+                },
+                "color": {
+                  "fieldName": "weathersit",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "weathersit"
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "frame": {
+                "title": "Proportion of Bike Rentals by Weather Situation",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 6,
+            "width": 3,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "303da888",
+      "displayName": "Global Filters",
+      "layout": [
+        {
+          "widget": {
+            "name": "0757b289",
+            "queries": [
+              {
+                "name": "dashboards/01f05e19cf861b2e9b1875decd7f956e/datasets/01f05e19eb6c1bc4ae6b9d28e63034de_customer_id",
+                "query": {
+                  "datasetName": "a2c7ec2b",
+                  "fields": [
+                    {
+                      "name": "customer_id",
+                      "expression": "`customer_id`"
+                    },
+                    {
+                      "name": "customer_id_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "customer_id",
+                    "displayName": "customer_id",
+                    "queryName": "dashboards/01f05e19cf861b2e9b1875decd7f956e/datasets/01f05e19eb6c1bc4ae6b9d28e63034de_customer_id"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    }
+  }
+}
